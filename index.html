@@ -19,11 +19,14 @@
   <div id="app">در حال بارگذاری... ⏳</div>
   <script>
     window.$docsify = {
-      name: '⚖️ قانون آب',
-      repo: '',
-      loadSidebar: false, // فعلاً برای سادگی غیرفعال کردیم
-      homepage: 'water/!main.md', // فایل اصلی سایت
-    }
+    name: '⚖️ قانون آب',
+    repo: '',
+    // ۱. به داکسیفای می‌گیم همه‌ی فایل‌ها توی پوشه water هستن
+    basePath: 'water/', 
+    // ۲. اسم فایل اصلی رو دقیقاً همونی بذار که توی پوشه هست (مثلاً !main.md)
+    homepage: '!main.md', 
+    loadSidebar: false,
+  }
   </script>
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
 </body>
