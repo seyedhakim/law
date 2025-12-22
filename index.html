@@ -2,7 +2,7 @@
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
-  <title>قانون توزیع عادلانه آب</title>
+  <title>دانشنامه قوانین حقوقی - قانون آب</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
@@ -10,44 +10,84 @@
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   
   <style>
-    /* ۲. تنظیم فونت وزیر برای تمام بخش‌های سایت */
-    :root {
-      --docsifytabs-border-color: #ededed;
-    }
-    
+    /* تنظیمات فونت و استایل کلی صفحه */
     body {
-      font-family: 'Vazirmatn', sans-serif !important; /* اعمال فونت وزیر */
+      font-family: 'Vazirmatn', sans-serif !important;
       direction: rtl;
       text-align: justify;
-      line-height: 1.8; /* فاصله خطوط رو کمی بیشتر کردیم برای خوانایی بهتر */
+      line-height: 1.8;
     }
 
-    /* راست‌چین کردن منو و محتوا */
-    .sidebar { left: auto; right: 0; border-left: 1px solid rgba(0,0,0,.07); border-right: none; }
-    .content { left: 0; right: 300px; }
-    .sidebar-nav { direction: rtl; }
-    
-    /* اصلاح جابجایی دکمه همبرگری در موبایل */
+    /* تنظیمات سایدبار (منوی کناری) در سمت راست */
+    .sidebar {
+      left: auto;
+      right: 0;
+      transition: transform 0.25s ease-out;
+      border-left: 1px solid rgba(0,0,0,.07);
+      border-right: none;
+    }
+
+    /* استایل خروج منو از صفحه وقتی بسته می‌شود */
+    body.close .sidebar {
+      transform: translateX(300px);
+    }
+
+    /* تنظیم بخش محتوا و واکنش به باز/بسته شدن منو */
+    .content {
+      left: 0;
+      right: 300px;
+      transition: right 0.25s ease-out;
+      padding-top: 20px;
+    }
+
+    /* وقتی منو بسته می‌شود، محتوا تمام عرض را می‌گیرد */
+    body.close .content {
+      right: 0;
+    }
+
+    /* جابجایی دکمه همبرگری به سمت راست برای زبان فارسی */
+    .sidebar-toggle {
+      left: auto;
+      right: 0;
+      bottom: 0;
+      width: 50px;
+      height: 50px;
+      background: rgba(255,255,255,0.8);
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    /* تنظیمات مخصوص موبایل */
     @media screen and (max-width: 768px) {
       .content { right: 0; }
-      .sidebar-toggle { right: 0; left: auto; }
       .sidebar { right: -300px; left: auto; }
       body.close .sidebar { transform: translateX(300px); }
+      .sidebar-toggle { width: auto; background: transparent; }
     }
+
+    /* خوشگل‌سازی لینک‌ها و تیترها */
+    .sidebar-nav ul li a { font-size: 15px; }
+    .markdown-section h1, .markdown-section h2, .markdown-section h3 { color: #2c3e50; }
   </style>
 </head>
 <body>
-  <div id="app">در حال بارگذاری... ⏳</div>
+  <div id="app">در حال بارگذاری قانون آب... ⏳</div>
+  
   <script>
     window.$docsify = {
       name: '⚖️ قانون آب',
+      // مسیر فایل‌ها در مخزن شما
       basePath: 'water/',
+      // فایل اصلی که باید نمایش داده شود
       homepage: '!main.md',
-      loadSidebar: false,
-      // تنظیمات مربوط به جستجو و فونت
-      auto2top: true,
+      // تنظیمات تکمیلی
+      auto2top: true, // با رفتن به صفحه بعد، اسکرول به بالا برگردد
+      executeScript: true,
+      mergeNavbar: true,
+      el: '#app'
     }
   </script>
+
   <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
 </body>
 </html>
