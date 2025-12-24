@@ -1,0 +1,37 @@
+// این کد markdown استاندار ai تحویل میگیره و markdownV2 تحویل میده
+//برای هر فیلد ورودی یه فیلد خروجی با پسوند _formatted میسازه
+
+
+for (const item of items) {
+  // تمام کلیدهای موجود در آیتم رو می‌گیریم (main, simple, id, ...)
+  const keys = Object.keys(item.json);
+
+  for (const key of keys) {
+    let text = item.json[key];
+
+    // فقط اگر مقدار "متن" بود پردازشش می‌کنیم (اعداد و ... رو بیخیال میشیم)
+    if (typeof text === 'string') {
+      
+      // 1️⃣ مرحله اول: محافظت از فرمت‌ها
+      const BOLD_MARKER = "🔹BOLD🔹";
+
+      // تبدیل تیترها (### متن) به نشونه
+      text = text.replace(/^#+\s+(.*)$/gm, `${BOLD_MARKER}$1${BOLD_MARKER}`);
+
+      // تبدیل بولد استاندارد (**متن**) به نشونه
+      text = text.replace(/\*\*(.*?)\*\*/g, `${BOLD_MARKER}$1${BOLD_MARKER}`);
+
+      // 2️⃣ مرحله دوم: تمیزکاری (Escape) برای تلگرام
+      // کاراکترهای خاص تلگرام رو خنثی می‌کنیم
+      text = text.replace(/[_\*\[\]\(\)~`>#\+\-=|{}.!]/g, '\\$&');
+
+      // 3️⃣ مرحله سوم: بازگرداندن فرمت‌ها به استاندارد تلگرام (*)
+      text = text.split(BOLD_MARKER).join('*');
+
+      // ساخت فیلد جدید به صورت داینامیک: اسم فیلد اصلی + _formatted
+      item.json[`${key}_formatted`] = text;
+    }
+  }
+}
+
+return items;
