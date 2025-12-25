@@ -1,0 +1,26 @@
+// دریافت تمام آیتم‌های ورودی
+const items = $input.all();
+
+// پردازش تک‌تک آیتم‌ها
+const processedItems = items.map(item => {
+  // گرفتن مقدار p و تبدیل به رشته (اگر وجود نداشت، رشته خالی جایگزین می‌شود)
+  let value = String(item.json.p || "");
+
+  // ۱. حذف کاراکترهای مخفی و اسپیس از "ابتدای" متن
+  let cleanedValue = value.replace(/^[\s\u200B-\u200D\uFEFF]+/, '');
+
+  // ۲. حذف تمام براکت‌ها و هر آنچه بین آن‌هاست (به صورت سراسری)
+  // مثال: "سلام [کد] عزیز" تبدیل می‌شود به "سلام  عزیز"
+  cleanedValue = cleanedValue.replace(/\[[\s\S]*\]/g, '');
+
+  // ۳. (اختیاری) حذف فاصله‌های اضافه احتمالی که بعد از پاک کردن براکت‌ها باقی مانده
+  cleanedValue = cleanedValue.trim();
+
+  return {
+    json: {
+      p: cleanedValue
+    }
+  };
+});
+
+return processedItems;
